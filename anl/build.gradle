@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'maven-publish'
 }
 
 android {
@@ -34,7 +35,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion compose_version
+        kotlinCompilerExtensionVersion "1.1.0-beta04"
     }
     packagingOptions {
         resources {
@@ -67,4 +68,42 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                // Applies the component for the release build variant.
+                from components.release
+
+                // You can then customize attributes of the publication as shown below.
+                groupId = 'com.kotlinaai.anl'
+                artifactId = 'anl'
+                version = '1.0'
+            }
+            // Creates a Maven publication called “debug”.
+            debug(MavenPublication) {
+                // Applies the component for the debug build variant.
+                from components.debug
+
+                groupId = 'com.kotlinaai.anl'
+                artifactId = 'anl-debug'
+                version = '1.0'
+            }
+        }
+
+        repositories {
+            mavenLocal()
+            /*maven {
+                name = "GitHubPackages"
+                url = "https://maven.pkg.github.com/kotlinai/AvatarNameList"
+                credentials {
+                    username = "kotlinai"//project.findProperty("gpr.user") ?: System.getenv("kotlinai")
+                    password = "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"//project.findProperty("gpr.key") ?: System.getenv("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")
+                }
+            }*/
+        }
+    }
 }

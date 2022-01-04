@@ -84,26 +84,26 @@ afterEvaluate {
                 version = '1.0'
             }
             // Creates a Maven publication called “debug”.
-            debug(MavenPublication) {
+            /*debug(MavenPublication) {
                 // Applies the component for the debug build variant.
                 from components.debug
 
                 groupId = 'com.kotlinaai.anl'
                 artifactId = 'anl-debug'
                 version = '1.0'
-            }
+            }*/
         }
 
-        repositories {
+        /*repositories {
             mavenLocal()
-            /*maven {
+            *//*maven {
                 name = "GitHubPackages"
                 url = "https://maven.pkg.github.com/kotlinai/AvatarNameList"
                 credentials {
                     username = "kotlinai"//project.findProperty("gpr.user") ?: System.getenv("kotlinai")
                     password = "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"//project.findProperty("gpr.key") ?: System.getenv("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")
                 }
-            }*/
-        }
+            }*//*
+        }*/
     }
 }
